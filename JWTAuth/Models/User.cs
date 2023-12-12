@@ -1,37 +1,49 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JWTAuth.Models
 {
     public class User
     {
         [Key]
-        public string UserName { get; set; } = "";
-        public string Name { get; set; } = "";
-        public string Role { get; set; } = "Everyone";
-        public bool IsActive { get; set; } = false;
-        public string Token { get; set; } = "";        
-        public string Password { get; set; } = "";
+        public int UserId { get; set; }
 
-        public User(string userName, string name, string password, string role)
+        [Required]
+        public string UserName { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        public string Email { get; set; }
+
+        // Additional user-related properties
+
+        public string Role { get; set; }
+        public bool IsActive { get; set; } = false;
+        public string Token { get; set; } = "";
+        public User(string userName, string password, string email, string role)
         {
             UserName = userName;
-            Name = name;
             Password = password;
+            Email = email;
             Role = role;
         }
+        public virtual ICollection<Task> AssignedTasks { get; set; } = new List<Task>();
+        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
-
     public class LoginUser
     {
-        public string UserName { get; set; } = "";
+        public string Email { get; set; } = "";
         public string Password { get; set; } = "";
     }
 
     public class RegisterUser
     {
-        public string Name { get; set; } = "";
         public string UserName { get; set; } = "";
         public string Password { get; set; } = "";
+        public string Email { get; set; } = "";
+
         public string Role { get; set; } = "Everyone";
     }
 }
