@@ -4,6 +4,7 @@ using JWTAuth.Models;
 using JWTAuth.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace JWTAuth.Controllers
 {
@@ -42,15 +43,28 @@ namespace JWTAuth.Controllers
         }
 
         [HttpPut("{userId}")]
-        public async Task<ActionResult<User>> UpdateUser(int userId, [FromBody] User updatedUser)
+        public async Task<ActionResult<User>> UpdateUser(int userId, [FromBody] UpdateUserInputModel updateUserInput)
         {
-            var user = await _userService.UpdateUserAsync(userId, updatedUser);
+            // Validate the input model
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userUpdateModel = new User
+            (
+               updateUserInput.UserName,
+               updateUserInput.Email
+            );
+            var user = await _userService.UpdateUserAsync(userId, userUpdateModel);
 
             if (user == null)
+            {
                 return NotFound(); // Return 404 if user not found
+            }
 
             return Ok(user);
         }
+
         [HttpDelete("{userId}")]
         public async Task<ActionResult<bool>> DeleteUser(int userId)
         {

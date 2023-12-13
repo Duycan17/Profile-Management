@@ -29,6 +29,11 @@ namespace JWTAuth.Models
             Email = email;
             Role = role;
         }
+        public User(string userName, string email)
+        {
+            UserName = userName;
+            Email = email;
+        }
         public virtual ICollection<Task> AssignedTasks { get; set; } = new List<Task>();
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }

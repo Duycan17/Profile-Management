@@ -1,5 +1,6 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using JWTAuth.Models;
-using Task = System.Threading.Tasks.Task;
 
 namespace JWTAuth.Services
 {
@@ -7,6 +8,11 @@ namespace JWTAuth.Services
     {
         Task<Comment> GetCommentById(int commentId);
         Task<List<Comment>> GetAllComments();
-        Task SaveChangesAsync();
+        Task<Comment> CreateCommentAsync(CommentDTO newComment);
+        Task<Comment> UpdateCommentAsync(int commentId, CommentDTO updatedComment);
+        Task<bool> DeleteCommentAsync(int commentId);
+        System.Threading.Tasks.Task SaveChangesAsync();
+        Task<List<Comment>> GetCommentsByProfileId(int profileId);
+
     }
 }

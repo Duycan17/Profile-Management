@@ -40,11 +40,7 @@ namespace JWTAuth.Services
 
             // Update properties
             existingUser.UserName = updatedUser.UserName;
-            existingUser.Password = updatedUser.Password;
             existingUser.Email = updatedUser.Email;
-            existingUser.Role = updatedUser.Role;
-            existingUser.IsActive = updatedUser.IsActive;
-            existingUser.Token = updatedUser.Token;
 
             await SaveChangesAsync();
             return existingUser;

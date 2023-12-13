@@ -61,7 +61,7 @@ namespace JWTAuth.Controllers
                 return BadRequest(new { message = "Password needs to entered" });
             }
 
-            User userToRegister = new(user.UserName, user.Password, user.Email, "USER");
+            User userToRegister = new(user.UserName, user.Password, user.Email, "ADMIN");
 
             User registeredUser = await _authService.Register(userToRegister);
 

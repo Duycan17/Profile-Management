@@ -78,5 +78,10 @@ namespace JWTAuth.Services
         {
             await _dbContext.SaveChangesAsync();
         }
+        public async Task<List<Models.Task>> GetTasksByUserId(int userId)
+        {
+            return await _dbContext.Tasks.Where(t => t.AssignedToUserId == userId).ToListAsync();
+        }
+
     }
 }

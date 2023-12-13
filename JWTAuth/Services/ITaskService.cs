@@ -13,5 +13,7 @@ namespace JWTAuth.Services
         Task<Models.Task> UpdateTaskAsync(int taskId, TaskDTO updatedTask);
         Task<bool> DeleteTaskAsync(int taskId);
         System.Threading.Tasks.Task SaveChangesAsync();
+        Task<List<Models.Task>> GetTasksByUserId(int userId);
+
     }
 }

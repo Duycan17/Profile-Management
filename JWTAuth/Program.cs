@@ -67,6 +67,7 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
@@ -75,7 +76,10 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 // Program.cs
 
 // Minimal Api for short Application
-
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
 var app = builder.Build();
 
 // Configure endpoints
@@ -120,5 +124,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapHealthChecks("/health");
+app.UseCors("corsapp");
+
 
 app.Run();

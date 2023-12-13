@@ -64,5 +64,16 @@ namespace JWTAuth.Controllers
 
             return Ok(result);
         }
+        [HttpGet("byUser/{userId}")]
+        public async Task<ActionResult<List<Models.Task>>> GetTasksByUserId(int userId)
+        {
+            var tasks = await _taskService.GetTasksByUserId(userId);
+
+            if (tasks == null || tasks.Count == 0)
+                return NotFound(); // Return 404 if no tasks found
+
+            return Ok(tasks);
+        }
+
     }
 }
