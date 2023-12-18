@@ -38,7 +38,7 @@ namespace JWTAuth.Services
             {
                 ProfileTitle = newProfileDTO.ProfileTitle,
                 ProfileFile = fileBytes,
-                // You might want to set other properties here...
+                StandardName = newProfileDTO.StandardName
             };
 
             _dbContext.Profiles.Add(newProfile);
@@ -88,6 +88,11 @@ namespace JWTAuth.Services
         public async System.Threading.Tasks.Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();
+        }
+        public async Task<List<Profile>> FindByStandard(string standardName)
+        {
+            var profiles = await _dbContext.Profiles.Where(p => p.StandardName.Contains(standardName)).ToListAsync();
+            return profiles;
         }
     }
 }

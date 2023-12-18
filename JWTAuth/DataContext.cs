@@ -41,6 +41,8 @@ namespace JWTAuth
             modelBuilder.Entity<User>()
                     .HasIndex(u => u.Email)
                     .IsUnique();
+            // standard
+
 
 
             // Add additional configurations for other relationships

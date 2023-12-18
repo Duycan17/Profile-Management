@@ -12,5 +12,6 @@ namespace JWTAuth.Services
         Task<Profile> UpdateProfileAsync(int profileId, ProfileDTO updatedProfile);
         Task<bool> DeleteProfileAsync(int profileId);
         System.Threading.Tasks.Task SaveChangesAsync();
+        Task<List<Profile>> FindByStandard(string standardName);
     }
 }

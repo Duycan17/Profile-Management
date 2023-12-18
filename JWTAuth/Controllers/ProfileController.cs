@@ -3,7 +3,7 @@ using JWTAuth.Models;
 using JWTAuth.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Microsoft.EntityFrameworkCore;
 namespace JWTAuth.Controllers
 {
     [ApiController]
@@ -69,5 +69,12 @@ namespace JWTAuth.Controllers
 
             return NoContent(); // Return 204 No Content for successful deletion
         }
+        [HttpGet("st/{standardName}")]
+        public async Task<ActionResult<List<Profile>>> FindByStandard(string standardName)
+        {
+            var profiles = await _profileService.FindByStandard(standardName);
+            return Ok(profiles);
+        }
     }
 }
+

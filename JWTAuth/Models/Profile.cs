@@ -13,5 +13,8 @@ namespace JWTAuth.Models
         // Navigation property for the one-to-many relationship with Comment
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
+        // Navigation property for the one-to-one relationship with Standard
+        public string StandardName { get; set; }
+
     }
 }
